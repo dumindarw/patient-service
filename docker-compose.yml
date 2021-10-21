@@ -1,0 +1,32 @@
+version: '3.6'
+
+services:
+
+  patient-service:
+    image: patient-service:0.0.1-SNAPSHOT
+    environment:
+      - SPRING_PROFILES_ACTIVE=native
+    ports:
+      - "18003:8003" 
+    depends_on:
+      - db        
+    networks:
+      - native-network
+
+  db:
+    image: mariadb:10.6
+    volumes:
+      - ./mariadb:/var/lib/mysql
+      - ./docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_USER=medisoftuser
+      - MYSQL_PASSWORD=medisoft987
+      - MYSQL_DATABASE=patientdb
+    ports:
+      - "13306:3306"
+    networks:
+      - native-network
+
+networks:
+    native-network:

@@ -1,0 +1,12 @@
+USE patientdb;
+
+CREATE TABLE patient (
+  id int UNSIGNED AUTO_INCREMENT,
+  name VARCHAR(50),
+  nic VARCHAR(100),
+  is_active TINYINT DEFAULT 1,
+  birth_date DATE,
+  created_at TIMESTAMP NOT NULL DEFAULT NOW(),
+  updated_at TIMESTAMP NOT NULL DEFAULT NOW() ON UPDATE NOW(),
+  PRIMARY KEY (id)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
